@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <md-toolbar id="toolbar" class="md-dense">
+    <md-toolbar id="toolbar">
       <h2 class="md-title" style="flex: 1">GW Marmos</h2>
     </md-toolbar>
     <router-view/>
@@ -17,7 +17,6 @@ export default {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
