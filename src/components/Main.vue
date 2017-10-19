@@ -1,33 +1,42 @@
 <template>
 
-  <md-layout md-align="center">
+  <md-layout md-column>
+    <md-layout md-align="center">
 
-      <div class="card-holder">
+        <div class="card-holder">
 
-        <md-card v-for="project in projects" :key="project.marmoId" md-with-hover class="card">
-          <md-card-media>
-            <progressive-img
-              v-bind:src="'' + project.thumbnail  + ''"
-              placeholder="https://res.cloudinary.com/lm7uywoba/image/upload/c_scale,w_600/v1496342344/branding/powerup_background.jpg"
-              :blur="0"
-            />
-          </md-card-media>
+          <md-card v-for="project in projects" :key="project.marmoId" md-with-hover class="card">
+            <md-card-media>
+              <progressive-img
+                v-bind:src="'' + project.thumbnail  + ''"
+                placeholder="https://res.cloudinary.com/lm7uywoba/image/upload/c_scale,w_600/v1496342344/branding/powerup_background.jpg"
+                :blur="0"
+              />
+            </md-card-media>
 
-          <a class="card-link" v-bind:href="'' + project.link  + ''" target="_blank">
-            <md-card-header>
-              <div class="md-title">{{ project.client }}</div>
-              <div class="md-subhead">Size: {{ project.size }}</div>
-            </md-card-header>
-          </a>
+            <a class="card-link" v-bind:href="'' + project.link  + ''" target="_blank">
+              <md-card-header>
+                <div class="md-title">{{ project.client }}</div>
+                <div class="md-subhead">Size: {{ project.size }}</div>
+              </md-card-header>
+            </a>
 
-        </md-card>
+          </md-card>
+        </div>
 
-      </div>
+    </md-layout>
+
+    <infinite-loading @infinite="infiniteHandler" class="loader">
+      <span slot="no-more">That's it for now</span>
+    </infinite-loading>
+
   </md-layout>
 
 </template>
 
 <script>
+import InfiniteLoading from 'vue-infinite-loading'
+
 export default {
   data () {
     return {
@@ -36,14 +45,26 @@ export default {
     }
   },
   methods: {
-    getProjects: function () {
-      this.$http.get(this.link + '/designs').then(function (response) {
-        this.projects = response.body.Items
+    getProjects: function ($state) {
+      this.$http.get(this.link + '/designs', {
+        params: { offset: this.projects.length } 
+      }).then(function (response) {
+        
+        if (response.body.length == 0) {
+          $state.complete();
+        }
+
+        this.projects = this.projects.concat(response.body);
+        $state.loaded();
+
       })
-    }
+    },
+    infiniteHandler($state) {
+      this.getProjects($state)
+    },
   },
-  mounted: function () {
-    this.getProjects()
+  components: {
+    InfiniteLoading,
   }
 }
 </script>
@@ -73,6 +94,10 @@ export default {
 a.card-link, a.card-link:hover {
     color: #2c3e50;
     text-decoration: none;
+}
+
+.loader {
+
 }
 
 /* iPhone, etc portrait ---- */
