@@ -25,8 +25,6 @@
       </div>
   </md-layout>
 
-
-
 </template>
 
 <script>
