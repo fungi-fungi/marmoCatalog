@@ -26,7 +26,7 @@
 
     </md-layout>
 
-    <infinite-loading @infinite="infiniteHandler" class="loader">
+    <infinite-loading @infinite="infiniteHandler">
       <span slot="no-more">That's it for now</span>
     </infinite-loading>
 
@@ -92,12 +92,8 @@ export default {
 }
 
 a.card-link, a.card-link:hover {
-    color: #2c3e50;
-    text-decoration: none;
-}
-
-.loader {
-
+    color: #2c3e50 !important;
+    text-decoration: none !important;
 }
 
 /* iPhone, etc portrait ---- */
