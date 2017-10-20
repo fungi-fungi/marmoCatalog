@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <md-toolbar id="toolbar">
-      <h2 class="md-title" style="flex: 1">GW Marmos</h2>
+      <img src="http://res.cloudinary.com/lm7uywoba/image/upload/c_scale,h_30/v1497968588/branding/Gateway.png" />
     </md-toolbar>
     <router-view/>
   </div>
@@ -24,7 +24,11 @@ export default {
 }
 
 #toolbar {
-  margin-bottom: 40px;
+  border-bottom: 3px solid #429edc;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  background: white;
 }
 
 </style>

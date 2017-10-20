@@ -1,6 +1,6 @@
 <template>
 
-  <md-layout md-column>
+  <md-layout md-column class="wrapper">
     <md-layout md-align="center">
 
         <div class="card-holder">
@@ -47,9 +47,9 @@ export default {
   methods: {
     getProjects: function ($state) {
       this.$http.get(this.link + '/designs', {
-        params: { offset: this.projects.length } 
+        params: { offset: this.projects.length }
       }).then(function (response) {
-        
+
         if (response.body.length == 0) {
           $state.complete();
         }
@@ -71,6 +71,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.wrapper {
+  padding-top: 80px;
+}
 
 .card-holder {
   display: flex;
