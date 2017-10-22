@@ -3,7 +3,9 @@
     <md-toolbar id="toolbar">
       <img src="http://res.cloudinary.com/lm7uywoba/image/upload/c_scale,h_30/v1497968588/branding/Gateway.png" />
     </md-toolbar>
-    <router-view/>
+    <div class="wrapper">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -17,6 +19,10 @@ export default {
 </script>
 
 <style>
+.wrapper {
+  padding-top: 64px;
+}
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

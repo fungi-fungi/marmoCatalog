@@ -14,12 +14,12 @@
               />
             </md-card-media>
 
-            <a class="card-link" v-bind:href="'' + project.link  + ''" target="_blank">
+            <router-link :to="{ path: 'projects', query: { id: project.file }}" class="card-link">
               <md-card-header>
                 <div class="md-title">{{ project.client }}</div>
                 <div class="md-subhead">Size: {{ project.size }}</div>
               </md-card-header>
-            </a>
+            </router-link>
 
           </md-card>
         </div>
@@ -72,7 +72,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .wrapper {
-  padding-top: 80px;
+  padding-top: 16px;
 }
 
 .card-holder {
