@@ -8,8 +8,8 @@
           <md-card v-for="project in projects" :key="project.marmoId" md-with-hover class="card">
             <md-card-media>
               <progressive-img
-                v-bind:src="'' + project.thumbnail  + ''"
-                placeholder="https://res.cloudinary.com/lm7uywoba/image/upload/c_scale,w_600/v1496342344/branding/powerup_background.jpg"
+                v-bind:src="project.thumbnail"
+                v-bind:placeholder="placeholder"
                 :blur="0"
               />
             </md-card-media>
@@ -35,18 +35,20 @@
 </template>
 
 <script>
+import * as CONSTANTS from './../config.js'
 import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
   data () {
     return {
-      link: 'https://je9l0ppvp4.execute-api.us-east-2.amazonaws.com/beta/api',
-      projects: []
+      projects: [],
+      placeholder: CONSTANTS.PLACEHOLDER
     }
   },
   methods: {
     getProjects: function ($state) {
-      this.$http.get(this.link + '/designs', {
+
+      this.$http.get(CONSTANTS.API_URL + '/designs', {
         params: { offset: this.projects.length }
       }).then(function (response) {
 

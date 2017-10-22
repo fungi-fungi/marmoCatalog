@@ -1,18 +1,22 @@
 <template>
   <div id="app">
     <md-toolbar id="toolbar">
-      <img src="http://res.cloudinary.com/lm7uywoba/image/upload/c_scale,h_30/v1497968588/branding/Gateway.png" />
+      <img v-bind:src="logo" />
     </md-toolbar>
     <div class="wrapper">
       <router-view/>
     </div>
   </div>
+
 </template>
 
 <script>
+import * as CONSTANTS from './config.js'
+
 export default {
   data () {
     return {
+      logo: CONSTANTS.LOGO
     }
   }
 }

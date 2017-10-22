@@ -13,22 +13,23 @@
 </template>
 
 <script>
+import * as CONSTANTS from './../config.js'
 import VueScript2 from 'vue-script2'
 
 export default {
   data () {
     return {
       dialog: {
-        ok: 'Go to home page',
-        title: 'Apologies, but the URL you\'ve provided can not be found.',
-        contentHtml: 'Please contact your Gateway team via email (<a href="mailto:marketing@gatewaypowered.com?Subject=Design" target="_top">marketing@gatewaypowered.com</a>) to assist in getting you the correct design link'
+        ok: CONSTANTS.DIALOG_BUTTON_TEXT,
+        title: CONSTANTS.DIALOG_TITLE,
+        contentHtml: CONSTANTS.DIALOG_BODY
       }
     }
   },
   methods: {
     init() {
       let that = this;
-      VueScript2.load('//viewer.marmoset.co/main/marmoset.js').then(function () {
+      VueScript2.load(CONSTANTS.MARMOSET_URL).then(function () {
           that.loadMarmo();
       })
     },
@@ -50,7 +51,7 @@ export default {
         var myviewer = new marmoset.WebViewer(
           screenWidth,
           marmoHeight,
-          'https://s3.us-east-2.amazonaws.com/gw-marmos/' + this.$route.query.id +'.mview'
+          CONSTANTS.MARMOSET_BACKET + this.$route.query.id +'.mview'
         );
 
         document.getElementById('marmo').appendChild( myviewer.domRoot );
