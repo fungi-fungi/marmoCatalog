@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <md-toolbar id="toolbar">
-      <img v-bind:src="logo" />
+      <router-link to="/">
+        <img v-bind:src="logo" />
+      </router-link>
     </md-toolbar>
     <div class="wrapper">
       <router-view/>
