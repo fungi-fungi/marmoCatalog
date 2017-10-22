@@ -14,7 +14,7 @@
               />
             </md-card-media>
 
-            <router-link :to="{ path: 'projects', query: { id: project.file }}" class="card-link">
+            <router-link :to="{ path: 'projects', query: { id: project.file }}" target="_blank" class="card-link">
               <md-card-header>
                 <div class="md-title">{{ project.client }}</div>
                 <div class="md-subhead">Size: {{ project.size }}</div>
