@@ -42,6 +42,7 @@ export default {
   data () {
     return {
       projects: [],
+      lastEvaluatedKey: null,
       placeholder: CONSTANTS.PLACEHOLDER
     }
   },
@@ -49,15 +50,16 @@ export default {
     getProjects: function ($state) {
 
       this.$http.get(CONSTANTS.API_URL + '/designs', {
-        params: { offset: this.projects.length }
+        params: { startId: this.lastEvaluatedKey }
       }).then(function (response) {
-
-        if (response.body.length == 0) {
+        this.projects = this.projects.concat(response.data.Items);
+        if (response.data.LastEvaluatedKey) {
+          this.lastEvaluatedKey = response.data.LastEvaluatedKey.marmoId;
+          $state.loaded();
+        } else {
           $state.complete();
         }
-
-        this.projects = this.projects.concat(response.body);
-        $state.loaded();
+        
 
       })
     },
